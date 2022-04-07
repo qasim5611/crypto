@@ -1,0 +1,112 @@
+
+.forgotpas{
+  /* background: antiquewhite; */
+    width: 71%;
+    text-align: end;
+    color: #23c12b8e;
+    position: relative;
+    top: -16px;
+
+}
+
+
+.errmsg{
+background-color: #f8d7da;
+    color: #385425;
+    padding: 11px;
+    width: 66%;
+    border-radius: 2px;
+    margin-bottom: 7px;
+}
+
+
+
+.ball {
+  animation-name: rolling;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  Animation-iteration-count: 5000;
+  animation-delay:2s;
+  /* Tells the animation what to-do outside */
+  animation-fill-mode: both;
+  animation-direction: alternate;
+}
+
+@keyframes rolling {
+  0% {transform: translateX(0) rotate(0turn);}
+  20% {transform: translateX(300px) rotate(.5turn);}
+  40% {transform: translateX(0) rotate(-.2turn);}
+  70% {transform: translateX(800px) rotate(2.5turn);} 
+  100% {transform: translateX(0) rotate(-1.0turn);} 
+}
+
+
+/* .blink {
+  animation: blink-animation 1s steps(5, start) infinite;
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+} */
+
+
+
+
+
+
+
+
+
+
+ .span {
+     height: 86px;
+     margin-top: 150px;
+     text-align: center;
+  font: 700 4em/1 "Oswald", sans-serif;
+  letter-spacing: 0;
+  /* padding: 0.25em 0 0.325em; */
+  display: block;
+ 
+  text-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
+  /* Clip Background Image */
+  background: url(https://i.ibb.co/RDTnNrT/animated-text-fill.png) repeat-y;
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* Animate Background Image */
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: aitf 80s linear infinite;
+  
+  /* Activate hardware acceleration for smoother animations */
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+}
+
+/* Animate Background Image */
+@-webkit-keyframes aitf {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes aitf {
+ 0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.maintop{
+      background: #001317 !important;
+}

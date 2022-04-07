@@ -1,0 +1,87 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+header {
+  background: linear-gradient(150.17deg, rgb(0, 43, 35) 20.75%, rgb(2, 2, 20) 97.02%),
+    rgb(255, 255, 255);
+}
+
+body {
+  background-color: #001317;
+}
+
+.css-1633um2-MuiPaper-root {
+  padding: 0px !important;
+}
+
+.connbtn {
+  text-transform: capitalize;
+  width: 109px;
+  padding-top: 7px;
+  height: 28px;
+  font-weight: 500;
+  border-radius: 8px;
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  background: linear-gradient(150.17deg, rgba(0, 82, 7, 0.67) 20.75%, rgb(2, 2, 20) 97.02%), rgb(255, 255, 255);
+}
+
+.css-1uwgr7b-MuiTypography-root {
+  font-weight: 300 !important;
+}
+
+
+.MuiFormLabel-root, input{
+  color: white !important;
+}
+
+.MuiGrid-item{
+  background: none !important;
+}
+.MuiOutlinedInput-notchedOutline{
+  border-color: white !important;
+}
+
+.MuiButton-containedSecondary {
+  color: #fff;
+  background-color: #4d8053 !important;
+}
+
+body{
+  background-color: #001317 !important;
+}
