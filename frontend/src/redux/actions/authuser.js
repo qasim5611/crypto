@@ -91,6 +91,68 @@ export function saveArticle(body) {
 
 
 
+export function upvote(body) {
+  return (dispatch) => {
+    // let token = localStorage.getItem("token");
+
+    console.log("body", body);
+
+    axios
+      .post(API + "/upvoteCounter", body)
+      .then((resp) => {
+        // successFul("success");
+        console.log(resp.data);
+        // dispatch({
+        //   type: ARTICLE_SVE,
+        //   payload: { data: resp.data },
+        // });
+      
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+}
+
+
+
+
+
+
+export function downvote(body) {
+  return (dispatch) => {
+    // let token = localStorage.getItem("token");
+
+    console.log("body", body);
+
+    axios
+      .post(API + "/downvoteCounter", body)
+      .then((resp) => {
+        // successFul("success");
+        console.log(resp.data);
+        dispatch({
+          type: ARTICLE_SVE,
+          payload: { data: resp.data },
+        });
+    
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export function UpdatePass(body) {

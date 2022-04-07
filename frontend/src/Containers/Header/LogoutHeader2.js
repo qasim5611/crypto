@@ -18,6 +18,8 @@ const LogoutHeader2 = (props) => {
     setMobileOpen(!mobileOpen);
   };
 
+
+
   return (
     <AppBar
       position="fixed"
@@ -40,10 +42,10 @@ const LogoutHeader2 = (props) => {
           Home
         </Typography>
         <Typography variant="h6" noWrap component="div">
-          SignIn
+         Logout
         </Typography>
         <Typography variant="h6" noWrap component="div">
-          SignUp
+         fff
         </Typography>
         <Typography variant="h6" noWrap component="div">
           Contact

@@ -1,26 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import Button from "@mui/material/Button";
-
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
-
-import IconButton from "@material-ui/core/IconButton";
-import Input from "@material-ui/core/Input";
-import FilledInput from "@material-ui/core/FilledInput";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
-
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import Visibilityc from "@material-ui/icons/Visibility";
-import VisibilityOffc from "@material-ui/icons/VisibilityOff";
-
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
@@ -29,8 +10,6 @@ import history from "./../../../Components/history/history";
 import { saveArticle } from "./../../../redux/actions/authuser";
 
 import validator from "validator";
-
-
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -123,30 +102,6 @@ const uploadbtn = {
   }
 
 
-
-
-
-
-
-
-  // if (getArticle) {
-  //   if (msg == "You Are Already Registerd and Verified, Just hit on SignIn") {
-  //     setTimeout(() => {
-  //       history.push("/login");
-  //     }, 5000);
-  //   } else if (msg == "Email verification code send.") {
-  //     setTimeout(() => {
-  //       history.push("/verifyemail");
-  //     }, 5000);
-  //   } else if (
-  //     msg ==
-  //     "Email is already registred.  Check YOUR MAIL.. You just need to Verify Your Account..."
-  //   ) {
-  //     setTimeout(() => {
-  //       history.push("/verifyemail");
-  //     }, 5000);
-  //   }
-  // }
 
  
 

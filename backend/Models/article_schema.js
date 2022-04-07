@@ -4,7 +4,7 @@ const schema = mongoose.Schema;
 
 const Article = new schema(
   {
-    id: {
+    _id: {
       type: String,
       trim: true,
       max: 64,
@@ -40,6 +40,18 @@ const Article = new schema(
       type: String,
       trim: true,
       max: 64,
+    },
+    upvote: {
+      type: String,
+      trim: true,
+      max: 64,
+      default: 0,
+    },
+    downvote: {
+      type: String,
+      trim: true,
+      max: 64,
+      default: 0,
     },
   },
   {

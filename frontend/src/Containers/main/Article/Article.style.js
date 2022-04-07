@@ -29,6 +29,19 @@ export const Title = styled.h3`
   background: #001317;
   margin-top: 0px;
   padding-top: 23px;
+ 
+
+  .srch {
+    background-color: #002b23;
+    border: none;
+    height: 24px;
+    width: 300px;
+    padding: 9px;
+    ::placeholder,
+    ::-webkit-input-placeholder {
+      color: white;
+    }
+  }
 `;
 
 
@@ -176,6 +189,14 @@ export const Thumb = styled.div`
   /* align-items: start; */
   align-items: center;
   justify-content: flex-start;
+
+  .thumb {
+    padding: 5px;
+    border-radius: 50%;
+    &:hover {
+      background: #e5e5e5;
+    }
+  }
 `;
 
 
@@ -193,6 +214,32 @@ export const Spacerbot = styled.div`
 export const Counter = styled.p`
   padding: 0px;
   margin: 0px;
+`;
+
+
+
+export const SearchField = styled.span`
+  outline: none;
+  border: none;
+  height: 35px;
+  margin: 0px auto;
+  width: 80%;
+  font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  background-color: #012e1b;
+  .srch {
+    width: 90%;
+    background-color: #012e1b;
+    outline: none;
+    border: none;
+  }
+`;
+
+export const Icon = styled.span`
+  position: relative;
+  top: 5px;
+  left: 1px;
 `;
 
 

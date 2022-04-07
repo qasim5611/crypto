@@ -76,6 +76,12 @@ let Article = require("./routes/form/Article");
 
 app.post("/saveArticle", Article.save_article);
 
+app.post("/upvoteCounter", Article.upvote_count);
+
+// app.post("/upvoteCounter", Article.upvote_count);
+
+
+
 // app.post("/Saveformdata", upload.single("image"), Article.create_form);
 
 // app.post("/update", upload.single("image"), Article.gupdate_form);
