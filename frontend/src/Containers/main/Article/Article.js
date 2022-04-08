@@ -41,28 +41,18 @@ import { downvote } from "./../../../redux/actions/authuser";
 function Article() {
   let dispatch = useDispatch();
 
-  // const [upvote, setupvote] = useState(0);
-  // const [downvote, setdownvote] = useState(0);
-
-  // const [articleid, setarticleid] = useState([]);  //store is here
-
-
   const [state, setstate] = useState(false);
   const [state2, setstate2] = useState(false); // Use this to add filter on text change
 
   const [respLength, setrespLength] = useState(""); // Use this to add filter on text change
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
+
+  function initRun() {
     axios.get(API + "/getArticle").then((res) => {
       console.log("res.data", res.data);
-      // setfetcharticle(res.data);
-      // setstate2(res.data);
 
       var result = res.data;
-      // let result = resp.filter((item) => item.date < isoformatToday);
       console.log("parameter", result);
-
       setstate(result);
       setstate2(result);
 
@@ -70,19 +60,28 @@ function Article() {
       var leng = result.length;
       setrespLength(leng);
     });
+  }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+   axios.get(API + "/getArticle").then((res) => {
+     console.log("res.data", res.data);
+
+     var result = res.data;
+     console.log("parameter", result);
+     setstate(result);
+     setstate2(result);
+
+     console.log("resultLength", result.length);
+     var leng = result.length;
+     setrespLength(leng);
+   });
   }, []);
 
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
-
-  // const resetall = (e) => {
-  //   e.preventDefault();
-
-  //   let result = state2.filter((item) => item);
-  //   setstate(result);
-  // };
 
   const searchTextField = (e) => {
     e.preventDefault();
@@ -105,6 +104,10 @@ function Article() {
       no: "12",
     };
     dispatch(upvote(obj));
+    // initRun();
+      setTimeout(() => {
+        initRun();
+      }, 5000);
   }
 
   function downvotehandler(downvoteid) {
@@ -114,6 +117,7 @@ function Article() {
     };
 
     dispatch(downvote(obj));
+    // Init();
   }
 
   const getUpvotes = useSelector((state) => state.Auth.Upvotes);
