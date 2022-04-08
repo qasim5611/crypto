@@ -7,12 +7,7 @@ const app = express();
 const path = require("path");
 const cors = require("cors");
 
-
 app.use(cors());
-
-
-
-
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -78,9 +73,10 @@ app.post("/saveArticle", Article.save_article);
 
 app.post("/upvoteCounter", Article.upvote_count);
 
+app.post("/downvoteCounter", Article.downvote_count);
+
+
 // app.post("/upvoteCounter", Article.upvote_count);
-
-
 
 // app.post("/Saveformdata", upload.single("image"), Article.create_form);
 
@@ -89,8 +85,6 @@ app.post("/upvoteCounter", Article.upvote_count);
 // app.post("/deleteidBase", Article.del_form);
 
 app.get("/getArticle", Article.get_article);
-
-
 
 // User SignUp
 
@@ -104,27 +98,15 @@ app.post("/loginuser", Authenticate.signin_user);
 
 app.post("/VerifyToken", Authenticate.verify_tkn);
 
-
 app.post("/VerifyTokenforpass", Authenticate.verify_tknpass);
-
 
 app.post("/forgotpass", Authenticate.forgot_passw);
 
-
-
 app.post("/Updatepasswd", Authenticate.frgtpass_update);
 
-
-
 // User SignIn by Auth
-
 // let Signin = require("./routes/form/signIn/signin");
-
-
 // app.post("/authuserCredentl", Signin.auth_user);
-
-
-
 
 
 app.use(express.static("./build"));

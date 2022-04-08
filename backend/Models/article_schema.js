@@ -4,11 +4,6 @@ const schema = mongoose.Schema;
 
 const Article = new schema(
   {
-    _id: {
-      type: String,
-      trim: true,
-      max: 64,
-    },
     title: {
       type: String,
       trim: true,
@@ -35,6 +30,8 @@ const Article = new schema(
 
     journal: {
       type: String,
+      trim: true,
+      max: 64,
     },
     abstractdata: {
       type: String,

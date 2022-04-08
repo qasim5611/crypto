@@ -1,5 +1,5 @@
 import React, { useState , useEffect} from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
 
 import API from "./../../../redux/url";
 import axios from "axios";
@@ -39,11 +39,12 @@ import { upvote } from "./../../../redux/actions/authuser";
 import { downvote } from "./../../../redux/actions/authuser";
 
 function Article() {
-
-   let dispatch = useDispatch();
+  let dispatch = useDispatch();
 
   // const [upvote, setupvote] = useState(0);
   // const [downvote, setdownvote] = useState(0);
+
+  // const [articleid, setarticleid] = useState([]);  //store is here
 
 
   const [state, setstate] = useState(false);
@@ -58,18 +59,16 @@ function Article() {
       // setfetcharticle(res.data);
       // setstate2(res.data);
 
- var result = res.data;
-  // let result = resp.filter((item) => item.date < isoformatToday);
-  console.log("parameter", result);
+      var result = res.data;
+      // let result = resp.filter((item) => item.date < isoformatToday);
+      console.log("parameter", result);
 
-  setstate(result);
-  setstate2(result);
+      setstate(result);
+      setstate2(result);
 
-  console.log("resultLength", result.length);
-  var leng = result.length;
-  setrespLength(leng);
-
-
+      console.log("resultLength", result.length);
+      var leng = result.length;
+      setrespLength(leng);
     });
   }, []);
 
@@ -95,36 +94,47 @@ function Article() {
     setstate(result);
   };
 
-
-
   // const updateHandler = (id) => {
-    
+
   //   console.log(id);
   // };
- function upvotehandler(upvoteid) {
+  function upvotehandler(upvoteid) {
 
-  // let myid = id;
-  //  console.log(id);
-  //  setupvote(upvote + 20);
-  //  console.log(upvote);
-   let obj = {
-     key: upvoteid,
-     no: "12",
-   };
-
-   dispatch(upvote(obj));
- }
-
-  function downvotehandler(id) {
-    console.log(id);
-
-    console.log([id]);
-
-    // {downvote > 0 ? setdownvote(downvote - 1) : null }
-    //  setdownvote(downvote + 10);
-    // console.log(downvote);
-    dispatch(downvote([id]));
+    let obj = {
+      key: upvoteid,
+      no: "12",
+    };
+    dispatch(upvote(obj));
   }
+
+  function downvotehandler(downvoteid) {
+    let obj = {
+      key: downvoteid,
+      no: "12",
+    };
+
+    dispatch(downvote(obj));
+  }
+
+  const getUpvotes = useSelector((state) => state.Auth.Upvotes);
+  console.log("getUpvotes is", getUpvotes);
+
+  const getDownvotes = useSelector((state) => state.Auth.Downvotes);
+  console.log("getDownvotes is", getDownvotes);
+
+
+
+  // const getUpvotes = useSelector(state => Object.keys(state.Auth.Upvotes)
+  // .filter(x => x === '624fd785b6e43d32f87aa98a')
+  // .reduce((arr, key) => {
+  //   arr.push(state.Auth.getUpvotes[key].data);
+  //   return arr;
+  // }, []), shallowEqual);
+
+  // console.log(getUpvotes);
+// setarticleid(getUpvotes);
+var myid = "";
+
   return (
     <>
       <Grid container>
@@ -140,6 +150,17 @@ function Article() {
               onChange={searchTextField}
             />
           </Title>
+          {/* {getUpvotes ? (
+            <div>
+              {getUpvotes.map((item, index) => {
+             
+
+                return <div key={index}>{item}</div>;
+              })}
+            </div>
+          ) : (
+            <div style={{ color: "white" }}>Articles Loading...</div>
+          )} */}
         </Grid>
       </Grid>
 
@@ -149,6 +170,10 @@ function Article() {
             {state ? (
               <div>
                 {state.map((item, index) => {
+                  {
+                    /* {item > 0 ? myid = item._id  : null; } */
+                  }
+
                   return (
                     <ArticleSection>
                       <CardMain>
@@ -173,13 +198,8 @@ function Article() {
                             Journal Name : <span> {item.journal} </span>{" "}
                           </Journal>
                           <Abstract>Abstract</Abstract>
-                          <para>
-                            {/* <p className="text">
-                        {isReadMore ? text.slice(0, 150) : text}
-                        <span onClick={toggleReadMore} className="read-or-hide">
-                          {isReadMore ? "...read more" : " show less"}
-                        </span>
-                      </p> */}
+                          <Para>
+                          
 
                             {isReadMore ? (
                               item.abstractdata.slice(0, 30)
@@ -198,17 +218,16 @@ function Article() {
 
                             {/* {item.abstractdata ? } */}
                             {/* <SeeMore>see more</SeeMore> */}
-                          </para>
+                          </Para>
 
                           <ThumbRating>
                             <Thumb>
                               <ThumbUpOffAltIcon
                                 className="thumb"
-                                // onClick={updateHandler(item._id)}
                                 onClick={() => upvotehandler(item._id)}
-                                // onClick={() => this.UpdateRecordFromDB(value._id)}
                               />
-                              <Counter> 1 </Counter>
+
+                                <Counter>{item.upvote}</Counter>
                             </Thumb>
                             <Spacer />
                             <Thumb>
@@ -216,7 +235,7 @@ function Article() {
                                 className="thumb"
                                 onClick={() => downvotehandler(item._id)}
                               />
-                              <Counter> 2 </Counter>
+                              <Counter> {item.downvote} </Counter>
                             </Thumb>
                           </ThumbRating>
                           <Spacerbot />
@@ -235,7 +254,6 @@ function Article() {
             {" "}
             {/* <FcExpired size="23" /> */}
             No Record Available Right Now , Please Go to
-           
           </div>
         )}
       </ArticleSectionMain>

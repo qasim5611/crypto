@@ -16,6 +16,8 @@ import {
   CLEAR_STATE,
   ISTOKEN_OKTOEDIT,
   ARTICLE_SVE,
+  UPVOTE_SET,
+  DOWNVOTE_SET,
 } from "../constat";
 
 import history from "../../Components/history/history";
@@ -40,9 +42,9 @@ let token = localStorage.getItem("token");
 
 
 var initState = {
-
-ArticleData: "",
-
+  ArticleData: "",
+  Upvotes: [{}],
+  Downvotes: [{}],
   ErrMsg: "",
   Email: "",
 
@@ -63,7 +65,7 @@ ArticleData: "",
   ForgPassMsgMail: "",
   PassUpdateMsg: "",
 
-  TokenMsgPassUpdate:'',
+  TokenMsgPassUpdate: "",
 };
 
 export function Auth(state = initState, action) {
@@ -189,6 +191,27 @@ export function Auth(state = initState, action) {
 
       break;
 
+    case UPVOTE_SET:
+      console.log(action.payload.data);
+      console.log(action.payload.data[0].outputupdated);
+
+      return {
+        ...state,
+        Upvotes: action.payload.data[0].outputupdated,
+      };
+
+      break;
+
+    case DOWNVOTE_SET:
+      console.log(action.payload.data);
+      console.log(action.payload.data[0].outputupdated);
+
+      return {
+        ...state,
+        Downvotes: action.payload.data[0].outputupdated,
+      };
+
+      break;
     case CLEAR_STATE:
       console.log("ClearState", action.payload.data);
       return {
@@ -230,10 +253,10 @@ export function Auth(state = initState, action) {
     case ARTICLE_SVE:
       console.log("article reducer run", action.payload);
 
-      return {
-        ...state,
-        ArticleData: action.payload,
-      };
+      // return {
+      //   ...state,
+      //   ArticleData: action.payload,
+      // };
 
       break;
 

@@ -16,6 +16,8 @@ import {
   CLEAR_STATE,
   ISTOKEN_OKTOEDIT,
   ARTICLE_SVE,
+  UPVOTE_SET,
+  DOWNVOTE_SET,
 } from "../constat";
 import API from "../url";
 
@@ -102,10 +104,10 @@ export function upvote(body) {
       .then((resp) => {
         // successFul("success");
         console.log(resp.data);
-        // dispatch({
-        //   type: ARTICLE_SVE,
-        //   payload: { data: resp.data },
-        // });
+        dispatch({
+          type: UPVOTE_SET,
+          payload: { data: [resp.data] },
+        });
       
       })
       .catch((err) => {
@@ -124,15 +126,14 @@ export function downvote(body) {
     // let token = localStorage.getItem("token");
 
     console.log("body", body);
-
     axios
       .post(API + "/downvoteCounter", body)
       .then((resp) => {
         // successFul("success");
         console.log(resp.data);
         dispatch({
-          type: ARTICLE_SVE,
-          payload: { data: resp.data },
+          type: DOWNVOTE_SET,
+          payload: { data: [resp.data] },
         });
     
       })

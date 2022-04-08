@@ -1,5 +1,5 @@
 const articletable = require("../../Models/article_schema");
-
+const mongoose = require("mongoose");
 
 const Articles = {
   save_article: async function (req, res) {
@@ -66,57 +66,91 @@ const Articles = {
 
   upvote_count: async function (req, res) {
     try {
-      let id = req.body.key;
+      let ArticleId = req.body.key;
       // let image ;
-        console.log(req);
+      console.log(req);
 
-      console.log(req.body);
-      console.log(req.body.key);
+      let output = await articletable.findById({
+        _id: ArticleId,
+      });
 
-     
-    let mytb1 = await articletable.find({ id });
-    // let mytb1 = [];
-    
-    // db.collection.find({ _id: ObjectId("5e208c18d598b806c869ca37") }).pretty();
+      console.log("is user is find?", output.title);
 
-    console.log("is user is find?", mytb1);
+      //  var upvoter = 10;
+      var newupvoter = parseInt(output.upvote) + 40;
 
-    console.log("is user is find?", mytb1);
-
-    console.log("is user is find?", mytb1.title);
-
-    console.log("is user is find?", mytb1.upvote);
-
-    console.log("is user is find?", mytb1.downvote);
-
-    // code = await bcrypt.hash(code, 10);
-
-    if (mytb1) {
-      let isUpdates = await usertable.updateOne(
-        {
-          _id: id,
-        },
-        {
-          $set: {
-            upvote: 100,
+      if (output) {
+        let isUpdates = await articletable.updateOne(
+          {
+            _id: ArticleId,
           },
-        }
-      );
+          {
+            $set: {
+              upvote: newupvoter,
+            },
+          }
+        );
 
-      if (isUpdates) {
+        if (isUpdates) {
+          let outputupdated = await articletable.find();
+          return res.send({
+            msg: "upvote Updated",
+            outputupdated,
+          });
+        }
+
         return res.send({
-          msg: "upvote Updated",
+          msg: "upvote Not Updated",
           isUpdates,
         });
       }
-
-      return res.send({
-        msg: "upvote Not Updated",
-        isUpdates,
-      });
+    } catch (err) {
+      return res.status(err.status || 500).send(err.message);
     }
+  },
 
-    
+  downvote_count: async function (req, res) {
+    try {
+      let ArticleId = req.body.key;
+      // let image ;
+      console.log(req);
+
+      let output = await articletable.findById({
+        _id: ArticleId,
+      });
+
+      console.log("is user is find?", output.title);
+      console.log("is user is find?", output.downvote);
+
+
+      //  var upvoter = 10;
+      var newdownvoter = parseInt(output.downvote) + 10;
+
+      if (output) {
+        let isUpdates = await articletable.updateOne(
+          {
+            _id: ArticleId,
+          },
+          {
+            $set: {
+              downvote: newdownvoter,
+            },
+          }
+        );
+
+        if (isUpdates) {
+          let outputupdated = await articletable.find();
+          return res.send({
+            msg: "downvote Updated",
+            outputupdated,
+          });
+        }
+
+        return res.send({
+          msg: "downvote Not Updated",
+          isUpdates,
+        });
+      }
     } catch (err) {
       return res.status(err.status || 500).send(err.message);
     }
@@ -144,10 +178,10 @@ const Articles = {
   //     data.image = image;
   //   }
 
-    // let update = await Form.findOneAndUpdate({ _id: user_id }, data);
-    // if (update) {
-    //   return res.json("Successfully Updated");
-    // }
+  // let update = await Form.findOneAndUpdate({ _id: user_id }, data);
+  // if (update) {
+  //   return res.json("Successfully Updated");
+  // }
   // },
 };
 

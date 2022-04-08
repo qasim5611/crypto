@@ -38,10 +38,11 @@ export let UPDATEPASS_MSG = "UPDATEPASS_MSG";
 
 export let CLEAR_STATE = "CLEAR_STATE";
 
-
 export let ISTOKEN_OKTOEDIT = "ISTOKEN_OKTOEDIT";
 
+export let UPVOTE_SET = "UPVOTE_SET";
 
+export let DOWNVOTE_SET = "DOWNVOTE_SET";
 
 // export let LOGIN_DETAIL = "LOGIN_DETAIL"
 // export let LOGIN_SUCCESS = 'LOGIN_SUCCESS'
