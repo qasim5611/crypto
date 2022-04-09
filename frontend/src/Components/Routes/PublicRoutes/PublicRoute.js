@@ -8,6 +8,7 @@ import HeaderLogout from "./../../../Containers/Header/LogoutHeader";
 
 
 const PublicRoute = ({component: Component, ...rest}) => {
+  
     return (
       // restricted = false meaning public route
       // restricted = true meaning restricted route

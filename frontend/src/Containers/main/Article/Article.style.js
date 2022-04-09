@@ -29,7 +29,11 @@ export const Title = styled.h3`
   background: #001317;
   margin-top: 0px;
   padding-top: 23px;
- 
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+  align-items: center;
+  justify-content: space-around;
 
   .srch {
     background-color: #002b23;
@@ -47,7 +51,7 @@ export const Title = styled.h3`
 
 export const CardMain = styled.div`
   width: 385px;
-  height: 435px;
+  height: 470px;
   background-color: white;
   border-radius: 5px;
   margin: 0px auto;

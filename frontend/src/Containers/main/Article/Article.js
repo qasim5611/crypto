@@ -13,6 +13,9 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import SearchIcon from "@mui/icons-material/Search";
 
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
+
 import ArticleSection, {
   Title,
   CardMain,
@@ -59,6 +62,7 @@ function Article() {
       console.log("resultLength", result.length);
       var leng = result.length;
       setrespLength(leng);
+      // setLoading(false);
     });
   }
 
@@ -77,6 +81,17 @@ function Article() {
      setrespLength(leng);
    });
   }, []);
+
+
+
+  let [loading, setLoading] = useState(false);
+  let [color, setColor] = useState("#ffffff");
+
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
 
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
@@ -103,11 +118,14 @@ function Article() {
       key: upvoteid,
       no: "12",
     };
+
+    setLoading(true);
+
     dispatch(upvote(obj));
     // initRun();
       setTimeout(() => {
         initRun();
-      }, 5000);
+      }, 3000);
   }
 
   function downvotehandler(downvoteid) {
@@ -116,8 +134,13 @@ function Article() {
       no: "12",
     };
 
+    setLoading(true);
+
     dispatch(downvote(obj));
     // Init();
+    setTimeout(() => {
+      initRun();
+    }, 3000);
   }
 
   const getUpvotes = useSelector((state) => state.Auth.Upvotes);
@@ -168,6 +191,12 @@ var myid = "";
         </Grid>
       </Grid>
 
+      <div className="sweet-loading">
+  
+
+        <ClipLoader loading={loading} css={override} size={50} />
+      </div>
+
       <ArticleSectionMain>
         {respLength > 0 ? (
           <div>
@@ -179,73 +208,75 @@ var myid = "";
                   }
 
                   return (
-                    <ArticleSection>
-                      <CardMain>
-                        <Articleinfo>
-                          <ProfileImg>
-                            <Plogo>D</Plogo>
-                          </ProfileImg>
-                          <Profileinfo>
-                            <Tag> {item.title} </Tag>
-                            <Tag sm>
-                              by <span> {item.auther} </span>
-                            </Tag>
-                            <Tag sm> {item.date} </Tag>
-                          </Profileinfo>
-                        </Articleinfo>
-                        <ArticleImg>{/* <Myimage img={imag} /> */}</ArticleImg>
-                        <ArticleDesc>
-                          <Subject>
-                            Subject : <span> {item.subject} </span>{" "}
-                          </Subject>
-                          <Journal>
-                            Journal Name : <span> {item.journal} </span>{" "}
-                          </Journal>
-                          <Abstract>Abstract</Abstract>
-                          <Para>
-                          
+                    <>
+                      <ArticleSection>
+                        <CardMain>
+                          <Articleinfo>
+                            <ProfileImg>
+                              <Plogo>D</Plogo>
+                            </ProfileImg>
+                            <Profileinfo>
+                              <Tag> {item.title} </Tag>
+                              <Tag sm>
+                                by <span> {item.auther} </span>
+                              </Tag>
+                              <Tag sm> {item.date} </Tag>
+                            </Profileinfo>
+                          </Articleinfo>
+                          <ArticleImg>
+                            {/* <Myimage img={imag} /> */}
+                          </ArticleImg>
+                          <ArticleDesc>
+                            <Subject>
+                              Subject : <span> {item.subject} </span>{" "}
+                            </Subject>
+                            <Journal>
+                              Journal Name : <span> {item.journal} </span>{" "}
+                            </Journal>
+                            <Abstract>Abstract</Abstract>
+                            <Para>
+                              {isReadMore ? (
+                                item.abstractdata.slice(0, 30)
+                              ) : (
+                                <span>{item.abstractdata}</span>
+                              )}
 
-                            {isReadMore ? (
-                              item.abstractdata.slice(0, 30)
-                            ) : (
-                              <span>{item.abstractdata}</span>
-                            )}
+                              <span
+                                onClick={toggleReadMore}
+                                className="read-or-hide"
+                              >
+                                {isReadMore ? "...read more" : " show less"}
+                              </span>
 
-                            <span
-                              onClick={toggleReadMore}
-                              className="read-or-hide"
-                            >
-                              {isReadMore ? "...read more" : " show less"}
-                            </span>
+                              {/* {item.abstractdata} */}
 
-                            {/* {item.abstractdata} */}
+                              {/* {item.abstractdata ? } */}
+                              {/* <SeeMore>see more</SeeMore> */}
+                            </Para>
 
-                            {/* {item.abstractdata ? } */}
-                            {/* <SeeMore>see more</SeeMore> */}
-                          </Para>
-
-                          <ThumbRating>
-                            <Thumb>
-                              <ThumbUpOffAltIcon
-                                className="thumb"
-                                onClick={() => upvotehandler(item._id)}
-                              />
+                            <ThumbRating>
+                              <Thumb>
+                                <ThumbUpOffAltIcon
+                                  className="thumb"
+                                  onClick={() => upvotehandler(item._id)}
+                                />
 
                                 <Counter>{item.upvote}</Counter>
-                            </Thumb>
-                            <Spacer />
-                            <Thumb>
-                              <ThumbDownOffAltIcon
-                                className="thumb"
-                                onClick={() => downvotehandler(item._id)}
-                              />
-                              <Counter> {item.downvote} </Counter>
-                            </Thumb>
-                          </ThumbRating>
-                          <Spacerbot />
-                        </ArticleDesc>
-                      </CardMain>
-                    </ArticleSection>
+                              </Thumb>
+                              <Spacer />
+                              <Thumb>
+                                <ThumbDownOffAltIcon
+                                  className="thumb"
+                                  onClick={() => downvotehandler(item._id)}
+                                />
+                                <Counter> {item.downvote} </Counter>
+                              </Thumb>
+                            </ThumbRating>
+                            <Spacerbot />
+                          </ArticleDesc>
+                        </CardMain>
+                      </ArticleSection>
+                    </>
                   );
                 })}
               </div>
