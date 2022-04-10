@@ -118,6 +118,7 @@ console.log("UserMailForVerify", ErrMsg);
           textAlign: "center",
           color: "#049c56",
           fontSize: "27px",
+          marginTop: "70px",
         }}
       >
         {" "}

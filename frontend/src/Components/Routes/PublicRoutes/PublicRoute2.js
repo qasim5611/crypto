@@ -14,9 +14,7 @@ const PublicRoute = ({component: Component, ...rest}) => {
 
   console.log(rest.handleDrawerToggle);
 
- const [qasim, setqasim] = useState("123");
 
-  const [mobileOpen, setMobileOpen] = React.useState(false);
 
 
 // const handleDrawerToggle = () => {
@@ -26,9 +24,12 @@ const PublicRoute = ({component: Component, ...rest}) => {
     return (
       // restricted = false meaning public route
       // restricted = true meaning restricted route
-      <Route {...rest} render={(props) => isLogin() ? (
+      <Route
+        {...rest}
+        render={(props) =>
+          isLogin() ? (
             <div>
-              <LogoutHeader2 />
+              <LogoutHeader2 handleDrawerToggle={rest.handleDrawerToggle} />
               <Component {...props} />
             </div>
           ) : (

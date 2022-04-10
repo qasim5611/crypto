@@ -14,11 +14,23 @@ import logo from "./../../Assets/logo.png";
 
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 const LogoutHeader2 = (props) => {
   const drawerWidth = 240;
 
   // const { window } = props;
   // const [mobileOpen, setMobileOpen] = React.useState(false);
+
+const ImageDisp = {
+  display: "block",
+  "@media (max-width: 550px)": {
+    display: "none",
+  },
+};
+
+
 
 console.log('Header2 fdvf');
 
@@ -65,6 +77,7 @@ const Item = styled(Paper)(({ theme }) => ({
                 {" "}
                 <Item style={{ background: "none" }}>
                   <img
+                  className="logoimg"
                     src={logo}
                     style={{
                       width: 150,
@@ -95,7 +108,13 @@ const Item = styled(Paper)(({ theme }) => ({
                   textDecoration: "none",
                 }}
               >
-                <Item sx={{ p: 1, width: 100, cursor: "pointer", display: 'flex' }} className="fancybtn"> <VpnKeyIcon/> Login</Item>
+                <Item
+                  sx={{ p: 1, width: 100, cursor: "pointer", display: "flex" }}
+                  className="fancybtn"
+                >
+                  {" "}
+                  <VpnKeyIcon /> Login
+                </Item>
               </Link>
               &nbsp; &nbsp;&nbsp;
               <Link
@@ -107,9 +126,13 @@ const Item = styled(Paper)(({ theme }) => ({
                 }}
               >
                 {" "}
-                <Item sx={{ p: 1, width: 100, cursor: "pointer" }} className="fancybtn">
-                <AccountCircleIcon />
-                SignUp</Item>
+                <Item
+                  sx={{ p: 1, width: 100, cursor: "pointer" }}
+                  className="fancybtn"
+                >
+                  <AccountCircleIcon />
+                  SignUp
+                </Item>
               </Link>
             </Grid>
           </Grid>

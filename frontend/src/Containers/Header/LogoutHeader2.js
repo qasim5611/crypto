@@ -15,9 +15,13 @@ import { logoutuser } from "./../../redux/actions/authuser";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useDispatch } from "react-redux";
 import LogoutIcon from "@mui/icons-material/Logout";
+
+
 const LogoutHeader2 = (props) => {
 
+  console.log("Logout Header 2 props test");
 
+  console.log(props);
 
   
 const dispatch = useDispatch();
@@ -30,9 +34,7 @@ const logoutUser = () => {
   // const { window } = props;
   // const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  console.log("Header2 fdvf");
 
-  console.log(props);
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -76,6 +78,7 @@ const logoutUser = () => {
                 <Item style={{ background: "none" }}>
                   <img
                     src={logo}
+                    className="logoimg"
                     style={{
                       width: 150,
                       height: 30,

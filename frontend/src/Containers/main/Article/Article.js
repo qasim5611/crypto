@@ -14,7 +14,7 @@ import Grid from "@mui/material/Grid";
 import SearchIcon from "@mui/icons-material/Search";
 
 import { css } from "@emotion/react";
-import ClipLoader from "react-spinners/ClipLoader";
+import ClipLoader from "react-spinners/ScaleLoader";
 
 import ArticleSection, {
   Title,
@@ -62,7 +62,7 @@ function Article() {
       console.log("resultLength", result.length);
       var leng = result.length;
       setrespLength(leng);
-      // setLoading(false);
+      setLoading(false); 
     });
   }
 
@@ -82,6 +82,39 @@ function Article() {
    });
   }, []);
 
+
+  
+const loadercss = {
+  height: "200px",
+  textAlign: "center",
+};
+const loadicon = {
+  position: "relative",
+  top: "86px !important",
+};
+
+
+const loadericn = {
+  
+  borderColor: 'white'
+}
+
+
+ const loads = {
+   "@media (min-width: 550px)": {
+     paddingLeft: "80px !important",
+   },
+   height: "592px",
+   textAlign: "center",
+   position: "absolute",
+   /* margin-left: 702px; */
+   marginTop: "66px",
+   background: "#01191cd4",
+   width: "100%",
+   zIndex: "999",
+   paddingTop: "255px",
+   paddingLeft: "0px",
+ };
 
 
   let [loading, setLoading] = useState(false);
@@ -168,6 +201,14 @@ var myid = "";
         {/* <Grid item xs={3}>
           <Title>Article Section</Title>
         </Grid> */}
+
+        { loading ? (
+           <div className="sweet-loading" style={loads}>
+  
+
+        <ClipLoader style={loadericn}  size={100} height={35} width={4} radius={2} margin={2} />
+      </div> 
+        ) : null }
         <Grid item xs={12}>
           <Title>
             <input
@@ -191,11 +232,9 @@ var myid = "";
         </Grid>
       </Grid>
 
-      <div className="sweet-loading">
-  
 
-        <ClipLoader loading={loading} css={override} size={50} />
-      </div>
+
+     
 
       <ArticleSectionMain>
         {respLength > 0 ? (

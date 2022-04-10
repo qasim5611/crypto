@@ -98,40 +98,54 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 const drawerWidth = 240;
 
 const Sidebar = (props) => {
-  // const Form = lazy(() => import("../form.js"));
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
 
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  console.log("props");
+  console.log(props);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+  const setbgcol = {
+    background: "linear-gradient(150.17deg, rgb(0, 43, 35) 20.75%, rgb(2, 2, 20) 97.02%), rgb(255, 255, 255) !important",
   };
 
+
+  // const { window } = props;
+
+  // const { window } = props;
+  // const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  // const handleDrawerToggle = () => {
+  //   setMobileOpen(!mobileOpen);
+  // };
+
+  //  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  //  const handleDrawerToggle = () => {
+  //    setMobileOpen(!mobileOpen);
+  //  };
+
+
   const drawer = (
-    <div>
+    <div
+      style={{
+        background:
+          "linear-gradient(150.17deg, rgb(0, 43, 35) 20.75%, rgb(2, 2, 20) 97.02%), rgb(255, 255, 255)",
+      }}
+    >
       <Toolbar />
       <Divider />
       <List>
-        <Link to="/article">
+        <Link to="/article" style={{ color: "white", textDecoration: "none" }}>
           <ListItem button className="linkers">
             <ListItemIcon>
-              <VisibilityIcon />
+              <VisibilityIcon style={{ color: "white" }} />
             </ListItemIcon>
             Show Article
           </ListItem>
         </Link>
 
-        <Link to="/">
+        <Link to="/" style={{ color: "white", textDecoration: "none" }}>
           <ListItem button className="linkers">
             <ListItemIcon>
-              <HomeIcon />
+              <HomeIcon style={{ color: "white" }} />
             </ListItemIcon>
             Home
           </ListItem>
@@ -141,42 +155,42 @@ const Sidebar = (props) => {
       <List>
         <ListItem button className="linkers">
           <ListItemIcon>
-            <DashboardIcon />
+            <DashboardIcon style={{ color: "white" }} />
           </ListItemIcon>
           Leader Boards
         </ListItem>
 
         <ListItem button className="linkers">
           <ListItemIcon>
-            <InboxIcon />
+            <InboxIcon style={{ color: "white" }} />
           </ListItemIcon>
           Biginners Guide
         </ListItem>
 
         <ListItem button className="linkers">
           <ListItemIcon>
-            <AddRoadIcon boxIcon />
+            <AddRoadIcon boxIcon style={{ color: "white" }} />
           </ListItemIcon>
           Engineering
         </ListItem>
 
         <ListItem button className="linkers">
           <ListItemIcon>
-            <EngineeringIcon />
+            <EngineeringIcon style={{ color: "white" }} />
           </ListItemIcon>
           Health
         </ListItem>
 
         <ListItem button className="linkers">
           <ListItemIcon>
-            <HealthAndSafetyIcon />
+            <HealthAndSafetyIcon style={{ color: "white" }} />
           </ListItemIcon>
           Science
         </ListItem>
 
         <ListItem button className="linkers">
           <ListItemIcon>
-            <ChatIcon />
+            <ChatIcon style={{ color: "white" }} />
           </ListItemIcon>
           Chat
         </ListItem>
@@ -184,59 +198,48 @@ const Sidebar = (props) => {
     </div>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+   const container =
+     window !== undefined ? () => window().document.body : undefined;
+
+
+
+
 
   return (
-    <div>
-      <Box>
-        <CssBaseline />
-
-
-        {/* ////////////////////////////////  Sidebar Content ///////////////////////// */}
-
-        <Box
-          component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-          aria-label="mailbox folders"
-        >
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Drawer
-            container={container}
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-            sx={{
-              display: { xs: "block", sm: "none" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: drawerWidth,
-              },
-            }}
-          >
-            {drawer}
-          </Drawer>
-          <Drawer
-            variant="permanent"
-            sx={{
-              display: { xs: "none", sm: "block" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: drawerWidth,
-              },
-            }}
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Box>
-
-     
-      </Box>
-    </div>
+    <Box
+      component="nav"
+      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      aria-label="mailbox folders"
+    >
+      {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+      <Drawer
+        style={setbgcol}
+        // container={container}
+        variant="temporary"
+        open={props.mobileOpen}
+        onClose={props.handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        sx={{
+          display: { xs: "block", sm: "none" },
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+        }}
+      >
+        {drawer}
+      </Drawer>
+      <Drawer
+        style={setbgcol}
+        variant="permanent"
+        sx={{
+          display: { xs: "none", sm: "block" },
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+        }}
+        open
+      >
+        {drawer}
+      </Drawer>
+    </Box>
   );
 };
 
