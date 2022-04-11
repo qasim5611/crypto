@@ -18,6 +18,7 @@ import {
   ARTICLE_SVE,
   UPVOTE_SET,
   DOWNVOTE_SET,
+  ISUSER_VOTED,
 } from "../constat";
 
 import history from "../../Components/history/history";
@@ -42,6 +43,9 @@ let token = localStorage.getItem("token");
 
 
 var initState = {
+
+isVotedBefore: "",
+
   ArticleData: "",
   Upvotes: [{}],
   Downvotes: [{}],
@@ -198,6 +202,17 @@ export function Auth(state = initState, action) {
       return {
         ...state,
         Upvotes: action.payload.data[0].outputupdated,
+      };
+
+      break;
+
+    case ISUSER_VOTED:
+      console.log(action.payload.data);
+    
+
+      return {
+        ...state,
+        isVotedBefore: action.payload.data.msg,
       };
 
       break;

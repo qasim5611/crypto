@@ -23,23 +23,21 @@ function UploadArticle() {
 
   const inputRef = useRef(null);
 
-  const [value, setValue] = useState(new Date("2014-08-18T21:11:54"));
-  const handleChanger = (newValue) => {
-    setValue(newValue);
-  };
+
 
   ////////////////////////////////////////////////////////////////////////////////////
 
   const [values, setValues] = useState({
-    title: "",
-    auther: "",
-    date: "",
-    subject: "",
-    journal: "",
-    abstractdata: "",
+    title: null,
+    auther: null,
+    date: null,
+    subject: null,
+    journal: null,
+    abstractdata: null,
+    image: null,
   });
 
-  // const [valueserr, setValueserr] = useState({ nameerr: "", emailerr: "", passworderr: "" });
+  // const [valueserr, setValueserr] = useState({ nameerr: null, emailerr: "", passworderr: "" });
 
 
 const uploadbtn = {
@@ -59,10 +57,28 @@ const uploadbtn = {
   const [journalerr, setjournalerr] = useState("");
   const [abstractdataerr, setabstractdataerr] = useState("");
 
+  // const [first, setfirst] = useState(second) 
+
+
+// const onChangeHandler = (e) => {
+//     if (e.target.name == "image") {
+//       let val = e.target.files[0];
+//       console.log('val');
+//       console.log(val);
+//   }
+// };
 
 
   const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+       if (event.target.name == "image") {
+         let val = event.target.files[0];
+         console.log("val");
+         console.log(val);
+         setValues({ ...values, [prop]: val });
+       } else {
+         setValues({ ...values, [prop]: event.target.value });
+       }
+  
   };
 
   // const [msg, setMsg] = useState(false);
@@ -173,6 +189,12 @@ const uploadbtn = {
 
     return isvalid;
   };
+
+
+
+
+
+  
 
   const submit = (e) => {
     e.preventDefault();
@@ -334,6 +356,23 @@ const uploadbtn = {
               <div className="errmsg">{abstractdataerr}</div>
             ) : null}
           </center>
+
+          <center>
+            <input
+              type="file"
+              class="form-control"
+              required
+              name="image"
+              onChange={handleChange("image")}
+            />
+          </center>
+
+          {/* <center>
+
+            {abstractdataerr ? (
+              <div className="errmsg">{abstractdataerr}</div>
+            ) : null}
+          </center> */}
 
           <center>
             {" "}

@@ -11,7 +11,7 @@ var smtpTransport = nodemailer.createTransport({
   requireTLS: true,
   auth: {
     user: "qasimtahir5611@gmail.com",
-    pass: "Qasim@1048576", //Your email Pass
+    pass: "Qasim@1048576"
   },
 });
 

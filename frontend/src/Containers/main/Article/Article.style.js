@@ -69,10 +69,10 @@ export const Articleinfo = styled.div`
 `;
 export const ArticleImg = styled.div`
   height: 45%;
-  background-image: url(${imag});
+  /* background-image: url(${imag});
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: cover; */
 `;
 export const ArticleDesc = styled.div`
   height: 35%;

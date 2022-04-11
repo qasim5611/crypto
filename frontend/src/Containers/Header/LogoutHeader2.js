@@ -101,15 +101,18 @@ const logoutUser = () => {
               }}
             >
               <Link
-                to="/article"
+                to="/articleupload"
                 style={{
                   color: "white",
                   cursor: "pointer",
                   textDecoration: "none",
                 }}
               >
-                <Item sx={{ p: 1, width: 200, cursor: "pointer" }} className="fancybtn">
-                   <CloudUploadIcon/> Upload Articles
+                <Item
+                  sx={{ p: 1, width: 200, cursor: "pointer" }}
+                  className="fancybtn"
+                >
+                  <CloudUploadIcon /> Upload Articles
                 </Item>
               </Link>
               &nbsp; &nbsp;&nbsp;{" "}
@@ -118,7 +121,7 @@ const logoutUser = () => {
                 onClick={logoutUser}
                 sx={{ p: 1, width: 110, cursor: "pointer" }}
               >
-               <LogoutIcon /> Logout
+                <LogoutIcon /> Logout
               </Item>
             </Grid>
           </Grid>

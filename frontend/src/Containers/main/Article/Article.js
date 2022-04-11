@@ -16,6 +16,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ScaleLoader";
 
+ import { ToastContainer, toast } from "react-toastify";
+ import "react-toastify/dist/ReactToastify.css";
+
 import ArticleSection, {
   Title,
   CardMain,
@@ -39,7 +42,10 @@ import ArticleSection, {
   ArticleSectionMain,
 } from "./Article.style";
 import { upvote } from "./../../../redux/actions/authuser";
+import { CheckIsVoted } from "./../../../redux/actions/authuser";
+
 import { downvote } from "./../../../redux/actions/authuser";
+import imag from "./../../../Assets/cardimage.png";
 
 function Article() {
   let dispatch = useDispatch();
@@ -50,9 +56,13 @@ function Article() {
   const [respLength, setrespLength] = useState(""); // Use this to add filter on text change
 
 
+  // const [isUserVoted, setisUserVoted] = useState("");
+
   function initRun() {
     axios.get(API + "/getArticle").then((res) => {
       console.log("res.data", res.data);
+      console.log("res.data.msg", res.data);
+
 
       var result = res.data;
       console.log("parameter", result);
@@ -145,6 +155,10 @@ const loadericn = {
 
   //   console.log(id);
   // };
+
+
+  
+
   function upvotehandler(upvoteid) {
 
     let obj = {
@@ -152,13 +166,18 @@ const loadericn = {
       no: "12",
     };
 
-    setLoading(true);
+    // setLoading(true);
 
-    dispatch(upvote(obj));
-    // initRun();
-      setTimeout(() => {
-        initRun();
-      }, 3000);
+// call functon to check is user is voted already or Not?
+
+  //  dispatch(CheckIsVoted(obj));
+setLoading(true);
+   dispatch(upvote(obj));
+   setTimeout(() => {
+     initRun();
+   }, 3000);
+
+   
   }
 
   function downvotehandler(downvoteid) {
@@ -179,11 +198,28 @@ const loadericn = {
   const getUpvotes = useSelector((state) => state.Auth.Upvotes);
   console.log("getUpvotes is", getUpvotes);
 
+
+
   const getDownvotes = useSelector((state) => state.Auth.Downvotes);
   console.log("getDownvotes is", getDownvotes);
 
 
 
+ const isVotedBefore = useSelector((state) => state.Auth.isVotedBefore);
+ console.log("isVotedBefore", isVotedBefore);
+
+
+// if (isVotedBefore === "Already Added") {
+//   toast.info("Alredy Was Added", {
+//     position: "bottom-left",
+//     autoClose: 5000,
+//     hideProgressBar: false,
+//     closeOnClick: true,
+//     pauseOnHover: true,
+//     draggable: true,
+//     progress: undefined,
+//   });
+// }
   // const getUpvotes = useSelector(state => Object.keys(state.Auth.Upvotes)
   // .filter(x => x === '624fd785b6e43d32f87aa98a')
   // .reduce((arr, key) => {
@@ -192,8 +228,8 @@ const loadericn = {
   // }, []), shallowEqual);
 
   // console.log(getUpvotes);
-// setarticleid(getUpvotes);
-var myid = "";
+  // setarticleid(getUpvotes);
+  var myid = "";
 
   return (
     <>
@@ -202,13 +238,18 @@ var myid = "";
           <Title>Article Section</Title>
         </Grid> */}
 
-        { loading ? (
-           <div className="sweet-loading" style={loads}>
-  
-
-        <ClipLoader style={loadericn}  size={100} height={35} width={4} radius={2} margin={2} />
-      </div> 
-        ) : null }
+        {loading ? (
+          <div className="sweet-loading" style={loads}>
+            <ClipLoader
+              style={loadericn}
+              size={100}
+              height={35}
+              width={4}
+              radius={2}
+              margin={2}
+            />
+          </div>
+        ) : null}
         <Grid item xs={12}>
           <Title>
             <input
@@ -231,10 +272,6 @@ var myid = "";
           )} */}
         </Grid>
       </Grid>
-
-
-
-     
 
       <ArticleSectionMain>
         {respLength > 0 ? (
@@ -263,7 +300,11 @@ var myid = "";
                             </Profileinfo>
                           </Articleinfo>
                           <ArticleImg>
-                            {/* <Myimage img={imag} /> */}
+                            <img
+                              //  src={imag}
+                              src={API + "/uploads/" + item.image}
+                              style={{ height: "100%", width: "100%" }}
+                            />
                           </ArticleImg>
                           <ArticleDesc>
                             <Subject>
@@ -330,6 +371,7 @@ var myid = "";
             No Record Available Right Now , Please Go to
           </div>
         )}
+        <ToastContainer />
       </ArticleSectionMain>
     </>
   );

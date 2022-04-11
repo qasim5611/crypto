@@ -18,6 +18,7 @@ import {
   ARTICLE_SVE,
   UPVOTE_SET,
   DOWNVOTE_SET,
+  ISUSER_VOTED,
 } from "../constat";
 import API from "../url";
 
@@ -68,9 +69,19 @@ export function saveArticle(body) {
     // let token = localStorage.getItem("token");
 
     console.log("body", body);
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  let formData = new FormData();
 
+  for (var item in body) {
+    formData.append(item, body[item]);
+  }
+  console.log(formData);
     axios
-      .post(API + "/saveArticle", body)
+      .post(API + "/saveArticle", formData , body)
       .then((resp) => {
         // successFul("success");
         console.log(resp.data);
@@ -104,10 +115,19 @@ export function upvote(body) {
       .then((resp) => {
         // successFul("success");
         console.log(resp.data);
-        dispatch({
-          type: UPVOTE_SET,
-          payload: { data: [resp.data] },
-        });
+        if (resp.data.msg !== "Already Added") {
+          dispatch({
+            type: UPVOTE_SET,
+            payload: { data: [resp.data] },
+          });
+        }
+        else{
+             dispatch({
+               type: ISUSER_VOTED,
+               payload: { data: resp.data },
+             });
+        }
+     
       
       })
       .catch((err) => {
@@ -118,6 +138,32 @@ export function upvote(body) {
 
 
 
+
+export function CheckIsVoted(body) {
+  return (dispatch) => {
+    // let token = localStorage.getItem("token");
+
+    console.log("body", body);
+
+    axios
+      .post(API + "/CheckIsVoted", body)
+      .then((resp) => {
+        // successFul("success");
+        console.log('resp.data');
+        console.log(resp.data);
+
+        // if()
+        // dispatch({
+        //   type: ISUSER_VOTED,
+        //   payload: { data: resp.data },
+        // });
+         
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+}
 
 
 
@@ -297,6 +343,12 @@ export function authuser(body) {
           type: MSG_LOGINS,
           payload: resp.data,
         });
+          setTimeout(() => {
+          dispatch({
+            type: MSG_LOGINS,
+            payload: { data: "" },
+          });
+        }, 2000);
       }
       
       else {
@@ -307,6 +359,12 @@ export function authuser(body) {
           type: MSG_LOGIN,
           payload: resp.data,
         });
+          setTimeout(() => {
+            dispatch({
+              type: MSG_LOGINS,
+              payload: { data: "" },
+            });
+          }, 2000);
       }
 
         

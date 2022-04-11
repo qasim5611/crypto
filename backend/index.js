@@ -1,5 +1,5 @@
 const express = require("express");
-
+const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 const connectDatabase = require("./config/connection");
 
@@ -25,13 +25,7 @@ const storage = multer.diskStorage({
     cb(null, "uploads");
   },
   filename(req, file, cb) {
-    cb(
-      null,
-      `${file.fieldname}-${file.originalname
-        .toLowerCase()
-        .split(" ")
-        .join("_")}`
-    );
+    cb(null, uuidv4() + "." + file.mimetype.split("/")[1]);
   },
 });
 
@@ -58,7 +52,7 @@ var upload = multer({
   },
 });
 
-app.use("/api/uploads", express.static(path.join(_dirname, "uploads")));
+app.use("/uploads", express.static(path.join(_dirname, "uploads")));
 
 
 
@@ -69,9 +63,13 @@ app.use("/api/uploads", express.static(path.join(_dirname, "uploads")));
 
 let Article = require("./routes/form/Article");
 
-app.post("/saveArticle", Article.save_article);
+// app.post("/api/award/create", upload.single("image"), Award.Create);
+app.post("/saveArticle", upload.single("image"), Article.save_article);
 
 app.post("/upvoteCounter", Article.upvote_count);
+
+app.post("/CheckIsVoted", Article.isuser_voted);
+
 
 app.post("/downvoteCounter", Article.downvote_count);
 

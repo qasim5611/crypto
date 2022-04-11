@@ -9,6 +9,10 @@ const Article = new schema(
       trim: true,
       max: 64,
     },
+    isVoted: {
+      type: Boolean,
+      default: false,
+    },
 
     auther: {
       type: String,
@@ -37,6 +41,9 @@ const Article = new schema(
       type: String,
       trim: true,
       max: 64,
+    },
+    image: {
+      type: String,
     },
     upvote: {
       type: String,
